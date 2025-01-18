@@ -2,6 +2,6 @@
 
 
 ## TODO: 
-dynamically create filters
-dynamically create items
-fix filter div size
+dynamically create filters  
+dynamically create items  
+fix filter div size  
