@@ -1,8 +1,7 @@
-# React Quoting System for Screenprinting & Embroidery Shops
+# React Quoting WebApp for Print Shops
 
 
-TODO: 
--create card for items
--Create list of item cards
--create card for filter
--Create filter for items
+## TODO: 
+dynamically create filters
+dynamically create items
+fix filter div size
