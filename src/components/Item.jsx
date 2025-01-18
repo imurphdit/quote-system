@@ -1,12 +1,18 @@
 import './Item.css'
+import PropTypes from 'prop-types'
 
-function Item() {
+function Item({ title, img }) {
   return (
     <div className="item">
-        <img src='/public/hoodie.webp' className='item-img'/>
-        <p>Independant Hoodie</p>
+        <img src={img} className='item-img'/>
+        <p>{title}</p>
     </div>
   )
+}
+
+Item.propTypes = {
+    title: PropTypes.any,
+    img: PropTypes.any,
 }
 
 export default Item
