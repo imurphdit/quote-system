@@ -2,7 +2,7 @@
 
 
 TODO: 
-    -create card for items
-    -Create list of item cards
-    -create card for filter
-    -Create filter for items
+-create card for items
+-Create list of item cards
+-create card for filter
+-Create filter for items
