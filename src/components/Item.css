@@ -1,3 +1,8 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
 .item {
     width: 125px;
     height: 200px;
@@ -10,4 +15,16 @@
 
 .item-img {
     width: 100%;
+}
+
+.filters {
+    display: flex;
+    margin: 50px 0 50px 0;
+}
+
+.filter {
+    padding: 0 10px 0 10px;
+    margin: 0 5px 0 5px;
+    border: 1px solid black;
+    border-radius: 5px;
 }

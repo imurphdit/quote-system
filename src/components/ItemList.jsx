@@ -20,34 +20,42 @@ function ItemList({ items }) {
     <>
         <h3>What would you like to create?</h3>
         <div className="item-grid">
-          <Item
-          title="All"
-          onClick={() => changeFilter("all")}
-          />
-          <Item
-          title="Hoodie"
-          onClick={() => changeFilter("hoodie")}
-          />
-          <Item
-          title="Shirt"
-          onClick={() => changeFilter("shirt")}
-          />
-          <Item
-          title="Bag"
-          onClick={() => changeFilter("bag")}
-          />
-        </div>
+          <div className="filters">
+              <Item
+              title="All"
+              onClick={() => changeFilter("all")}
+              className="filter"
+              />
+              <Item
+              title="Hoodie"
+              onClick={() => changeFilter("hoodie")}
+              className="filter"
+              />
+              <Item
+              title="Shirt"
+              onClick={() => changeFilter("shirt")}
+              className="filter"
+              />
+              <Item
+              title="Bag"
+              onClick={() => changeFilter("bag")}
+              className="filter"
+              />
+            </div>
+          </div>
 
         <hr/>
 
         <div className="item-grid">
           {filteredItems.map((item) => (
-            <Link to={"/item/" + item.id} key={item.id}>
-              <Item
-              title={item.title}
-              img={item.img}
-              />
-            </Link>
+            <div className="item" key={item.id}>
+              <Link to={"/item/" + item.id}>
+                <Item
+                title={item.title}
+                img={item.img}
+                />
+              </Link>
+            </div>
           ))}
         </div>
     </>
