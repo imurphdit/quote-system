@@ -24,15 +24,15 @@ function ItemList({ items }) {
           onClick={() => changeFilter("all")}
           />
           <Item
-          title="Hoodie Filter"
+          title="Hoodie"
           onClick={() => changeFilter("hoodie")}
           />
           <Item
-          title="Shirt Filter"
+          title="Shirt"
           onClick={() => changeFilter("shirt")}
           />
           <Item
-          title="Bag Filter"
+          title="Bag"
           onClick={() => changeFilter("bag")}
           />
         </div>

@@ -2,6 +2,6 @@
 
 
 ## TODO: 
-dynamically create filters  
-dynamically create items  
+create database for items  
 fix filter div size  
+install react router to handle clicking on items to create 

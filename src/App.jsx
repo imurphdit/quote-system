@@ -9,7 +9,7 @@ function App() {
     {id: "4", title: "Camo Hoodie", img: "/public/camo_hoodie.webp", category: "hoodie"},
   ];
 
-  // TODO: CREATE ITEMS DYNAMICALLY
+  // TODO: CREATE ITEMS DYNAMICALLY VIA DATABASE
 
   return (
     <>
