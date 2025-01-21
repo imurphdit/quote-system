@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import Item from "./Item"
 import './ItemList.css'
 import PropTypes from 'prop-types'
@@ -41,11 +42,12 @@ function ItemList({ items }) {
 
         <div className="item-grid">
           {filteredItems.map((item) => (
-            <Item
-            key={item.id}
-            title={item.title}
-            img={item.img}
-            />
+            <Link to={"/item/" + item.id} key={item.id}>
+              <Item
+              title={item.title}
+              img={item.img}
+              />
+            </Link>
           ))}
         </div>
     </>
