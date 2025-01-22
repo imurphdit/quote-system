@@ -1,0 +1,9 @@
+.colors-grid {
+    display: flex;
+}
+
+.color {
+    height: 50px;
+    width: 25 px;
+    border: 1px solid black;
+}
