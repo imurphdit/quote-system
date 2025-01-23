@@ -13,9 +13,15 @@ const ItemCreate = () => {
     const [colorList, setColorList] = useState([]);
 
     const handleAddColor = (color) => {
-      setColorList([...colorList, color]);
-    }
 
+      if(colorList.includes(color)){
+        const newColorList = colorList.filter(currentColor => currentColor !== color);
+
+      setColorList(newColorList)
+      } else {
+      setColorList([...colorList, color]);
+      }
+    }
   return (
     <>
         <div>Current URL ID: {params.id}</div>
