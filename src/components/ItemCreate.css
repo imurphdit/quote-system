@@ -7,3 +7,16 @@
     width: 25 px;
     border: 1px solid black;
 }
+
+.color-size-grid {
+    display: grid;
+    margin-top: 50px;
+}
+
+.color-size-title {
+    background-color: gray;
+}
+
+.selected {
+    background-color: gray;
+}

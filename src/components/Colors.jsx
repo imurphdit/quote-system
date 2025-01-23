@@ -1,18 +1,17 @@
 import PropTypes from 'prop-types'
 
-const Colors = ({ colors, onClick }) => {
+const Colors = ({ color, onClick, className }) => {
   return (
-    <div className="colors-grid">
-        {colors.map((color) => (
-            <div className='color' key={color} onClick={() => onClick(color)}>{color}</div>
-        ))}
-    </div>
+    <div className='color' onClick={() => onClick(color)}>
+      <p className={className}>{color}</p>
+      </div>
   )
 }
 
 Colors.propTypes = {
-    colors: PropTypes.any,
-    onClick: PropTypes.any
+    color: PropTypes.any,
+    onClick: PropTypes.any,
+    className: PropTypes.any
 }
 
 export default Colors

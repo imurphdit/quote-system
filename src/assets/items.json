@@ -2,7 +2,7 @@
     {
         "id": "1", 
         "title": "Independent Hoodie", 
-        "img": "/public/hoodie.webp", 
+        "img": "/hoodie.webp", 
         "category": "hoodie",
         "colors": [
             "red",
@@ -14,7 +14,7 @@
     {
         "id": "2", 
         "title": "Independent Shirt", 
-        "img": "/public/shirt.webp", 
+        "img": "/shirt.webp", 
         "category": "shirt",
         "colors": [
             "red",
@@ -24,7 +24,7 @@
     {
         "id": "3", 
         "title": "Duffel Bag", 
-        "img": "/public/duffel.webp", 
+        "img": "/duffel.webp", 
         "category": "bag",
         "colors": [
             "red",
@@ -34,7 +34,7 @@
     {
         "id": "4", 
         "title": "Camo Hoodie", 
-        "img": "/public/camo_hoodie.webp", 
+        "img": "/camo_hoodie.webp", 
         "category": "hoodie",
         "colors": [
             "red",
