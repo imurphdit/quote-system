@@ -2,6 +2,8 @@
 
 
 ## TODO: 
+Add screenprinting & embroidery options for order  
 create database for items  
-fix filter div size  
-install react router to handle clicking on items to create
+pretty this bitch up  
+keep entire order in state, maybe email it?  
+
