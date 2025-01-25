@@ -13,6 +13,7 @@ const ItemCreate = () => {
     const currentItem = items.find((item) => item.id === params.id)
 
     const [colorList, setColorList] = useState([]);
+    const [sizeValues, setSizeValues] = useState({});
 
 
     // ADD CLICK STATE
@@ -21,10 +22,26 @@ const ItemCreate = () => {
       if(colorList.includes(color)){
         const newColorList = colorList.filter(currentColor => currentColor !== color);
         setColorList(newColorList)
-        
+        delete sizeValues[color]
+
       } else {
         setColorList([...colorList, color]);
+
+        // Init Size Values for Color
+        setSizeValues((prev) => ({
+          ...prev, [color]: prev[color] || { S: "", M: "", L: "", XL: ""},
+        }))
       }
+    }
+
+    const handleSizeChange = (color, size, value) => {
+      setSizeValues((prev) => ({
+        ...prev,
+        [color]: {
+          ...prev[color],
+          [size]: value,
+        }
+      }))
     }
 
   return (
@@ -49,11 +66,14 @@ const ItemCreate = () => {
               className={colorList.includes(color) ? "selected" : ""}
               />
             ))}
+            <div>
+              {JSON.stringify(sizeValues)}
+            </div>
           </div>
 
-            {/* List of Selected Color Styles */}
+            {/* Sizing of Selected Color Styles */}
             {colorList.map((color) => (
-              <ColorSizing color={color} key={color}/>
+              <ColorSizing color={color} key={color} handleSizeChange={handleSizeChange} sizeValues={sizeValues}/>
             ))}
             
             
