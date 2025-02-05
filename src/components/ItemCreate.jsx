@@ -34,7 +34,7 @@ const ItemCreate = () => {
   };
 
   const handleSizeChange = (color, size, value) => {
-    setOrderInfo((prev) => ({...prev, Sizes: {...prev.Sizes, [color]: { ...prev.Sizes[color], [size]: [value] }}}))
+    setOrderInfo((prev) => ({...prev, Sizes: {...prev.Sizes, [color]: { ...prev.Sizes[color], [size]: value }}}))
   };
 
   return (
