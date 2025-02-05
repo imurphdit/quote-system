@@ -28,3 +28,8 @@
 .grid {
     display: flex;
 }
+
+.print-method-section {
+    width: 90%;
+    border: 1px solid black;
+}

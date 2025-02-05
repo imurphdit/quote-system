@@ -5,6 +5,7 @@ import Colors from "./Colors";
 import "./ItemCreate.css";
 import { useState } from "react";
 import ColorSizing from "./ColorSizing";
+import PrintMethod from "./PrintMethod";
 
 const ItemCreate = () => {
   //LOCATES CURRENT ITEM VIA URL ID
@@ -32,6 +33,30 @@ const ItemCreate = () => {
       console.log(color + " added");
     }
   };
+
+  const addPrintArea = (area) => {
+    if (area in orderInfo["Printing Areas"]){
+      const newList = {...orderInfo}
+      delete newList["Printing Areas"][area]
+      setOrderInfo(newList)
+    } else {
+      setOrderInfo((prev) => ({
+        ...prev, "Printing Areas": {...prev["Printing Areas"], [area]: {Method: "", Size: "", }}
+      }))
+    }
+  }
+
+
+  const addPrintMethod = (area, method) => {
+    console.log("Area: " + area + " Method: " + method);
+    const currentMethod = orderInfo["Printing Areas"][area]['Method'];
+    
+    if(Object.is(currentMethod, method)){
+      setOrderInfo((prev) => ({...prev, "Printing Areas": {...prev["Printing Areas"], [area]: {...prev["Printing Areas"][area], 'Method': ''}}}))
+    } else {
+      setOrderInfo((prev) => ({...prev, "Printing Areas": {...prev["Printing Areas"], [area]: {...prev["Printing Areas"][area], 'Method': method}}}))
+    }
+  }
 
   const handleSizeChange = (color, size, value) => {
     setOrderInfo((prev) => ({...prev, Sizes: {...prev.Sizes, [color]: { ...prev.Sizes[color], [size]: value }}}))
@@ -72,6 +97,23 @@ const ItemCreate = () => {
               key={color}
               handleSizeChange={handleSizeChange}
               sizeValues={orderInfo.Sizes}
+            />
+          ))}
+
+          {['front', 'back', 'left shoulder', 'right shoulder'].map((item) => (
+            <Colors
+            key={item}
+            color={item}
+            onClick={addPrintArea}
+            className={item in orderInfo["Printing Areas"] ? "selected" : ""}
+            />
+          ))}
+
+          {Object.keys(orderInfo["Printing Areas"]).map((area) => (
+            <PrintMethod
+              key={area}
+              printArea={area}
+              addMethod={addPrintMethod}
             />
           ))}
         </>
