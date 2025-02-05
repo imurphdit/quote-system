@@ -1,87 +1,85 @@
-import { useParams } from "react-router"
-import items from '../assets/items.json'
-import Item from './Item'
+import { useParams } from "react-router";
+import items from "../assets/items.json";
+import Item from "./Item";
 import Colors from "./Colors";
-import './ItemCreate.css'
+import "./ItemCreate.css";
 import { useState } from "react";
 import ColorSizing from "./ColorSizing";
 
-
 const ItemCreate = () => {
-    let params = useParams();
+  //LOCATES CURRENT ITEM VIA URL ID
+  let params = useParams();
+  const currentItem = items.find((item) => item.id === params.id);
 
-    const currentItem = items.find((item) => item.id === params.id)
+  // USE STATES
+  const [orderInfo, setOrderInfo] = useState({
+    Item: currentItem.title,
+    Sizes: {},
+    "Printing Areas": {},
+  });
 
-    const [colorList, setColorList] = useState([]);
-    const [sizeValues, setSizeValues] = useState({});
-
-
-    // ADD CLICK STATE
-    const handleAddColor = (color) => {
-
-      if(colorList.includes(color)){
-        const newColorList = colorList.filter(currentColor => currentColor !== color);
-        setColorList(newColorList)
-        delete sizeValues[color]
-
-      } else {
-        setColorList([...colorList, color]);
-
-        // Init Size Values for Color
-        setSizeValues((prev) => ({
-          ...prev, [color]: prev[color] || { S: "", M: "", L: "", XL: ""},
-        }))
-      }
-    }
-
-    const handleSizeChange = (color, size, value) => {
-      setSizeValues((prev) => ({
+  const handleAddColor = (color) => {
+    if (color in orderInfo.Sizes) {
+      const newList = { ...orderInfo };
+      delete newList.Sizes[color];
+      console.log(color + " deleted");
+      setOrderInfo(newList);
+    } else {
+      setOrderInfo((prev) => ({
         ...prev,
-        [color]: {
-          ...prev[color],
-          [size]: value,
-        }
-      }))
+        Sizes: { ...prev.Sizes, [color]: { S: "", M: "", L: "", XL: "" } },
+      }));
+      console.log(color + " added");
     }
+  };
+
+  const handleSizeChange = (color, size, value) => {
+    setOrderInfo((prev) => ({...prev, Sizes: {...prev.Sizes, [color]: { ...prev.Sizes[color], [size]: [value] }}}))
+  };
 
   return (
     <>
-        <div>Current URL ID: {params.id}</div>
-        {currentItem
-        ? (
+      <div>Current URL ID: {params.id}</div>
+      {currentItem ? (
         <>
-          <div>Current Item: {currentItem.title} the category is {currentItem.category} Testing: {currentItem.colors[1]}</div>
+          <div>
+            Current Item: {currentItem.title} the category is{" "}
+            {currentItem.category} Testing: {currentItem.colors[1]}
+          </div>
 
           <Item
             title={currentItem.title}
             img={currentItem.img}
-            className='item'/>
+            className='item'
+          />
 
-          <div className="colors-grid">
+          <div className='colors-grid'>
             {currentItem.colors.map((color) => (
               <Colors
-              color={color}
-              key={color}
-              onClick={handleAddColor}
-              className={colorList.includes(color) ? "selected" : ""}
+                color={color}
+                key={color}
+                onClick={handleAddColor}
+                className={color in orderInfo.Sizes ? "selected" : ""}
               />
             ))}
-            <div>
-              {JSON.stringify(sizeValues)}
-            </div>
+            <pre>{JSON.stringify(orderInfo, null, '\t')}</pre>
           </div>
 
-            {/* Sizing of Selected Color Styles */}
-            {colorList.map((color) => (
-              <ColorSizing color={color} key={color} handleSizeChange={handleSizeChange} sizeValues={sizeValues}/>
-            ))}
-            
-            
+          {/* Sizing of Selected Color Styles */}
+          {Object.keys(orderInfo.Sizes).map((color) => (
+            <ColorSizing
+              color={color}
+              key={color}
+              handleSizeChange={handleSizeChange}
+              sizeValues={orderInfo.Sizes}
+            />
+          ))}
         </>
-        )
-        : (<div>No item found</div>)}
+      ) : (
+        <div>No item found</div>
+      )}
     </>
-  )
-}
+  );
+};
 
-export default ItemCreate
+export default ItemCreate;

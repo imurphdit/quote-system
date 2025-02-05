@@ -20,3 +20,11 @@
 .selected {
     background-color: gray;
 }
+
+.print-grid {
+    display: flex;
+}
+
+.grid {
+    display: flex;
+}

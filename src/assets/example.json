@@ -1,0 +1,20 @@
+[
+    {
+        "ItemName": "Independent Hoodie 22GM",
+        "Sizes": {
+            "blue":{"S":"1","M":"4","L":"1","XL":"13"},
+            "red":{"S":"5","M":"4","L":"3","XL":"1"}
+        },
+        "PrintingAreas": {
+            "Front": {
+                "Print Type": "Embroidery",
+                "Print Size": "5x5"
+            },
+            "Back": {
+                "Print Type": "Screenprinting",
+                "Print Size": "Big asf",
+                "Ink Colors": 6
+            }
+        }
+    }
+]
