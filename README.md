@@ -7,4 +7,5 @@ create database for items
 pretty this bitch up  
 setup orderInfo emailing on submission
 change colors component to button?
+rename all these fucking files lololololol
 

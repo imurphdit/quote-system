@@ -15,6 +15,7 @@
 
 .color-size-title {
     background-color: gray;
+    width: 10%;
 }
 
 .selected {
@@ -32,4 +33,22 @@
 .print-method-section {
     width: 90%;
     border: 1px solid black;
+}
+
+.printLocation-container {
+    display: flex;
+}
+
+.printLocation {
+    padding: 10px;
+    margin: 0 0 0 10px;
+    border: 1px solid black
+}
+
+.info {
+    position: absolute;
+    right: 1350px;
+    background-color: gray;
+    border: 1px solid black;
+    color: aliceblue;
 }

@@ -1,11 +1,11 @@
 import { useParams } from "react-router";
 import items from "../assets/items.json";
 import Item from "./Item";
-import Colors from "./Colors";
 import "./ItemCreate.css";
 import { useState } from "react";
 import ColorSizing from "./ColorSizing";
 import PrintMethod from "./PrintMethod";
+import Button from "./Button";
 
 const ItemCreate = () => {
   //LOCATES CURRENT ITEM VIA URL ID
@@ -67,9 +67,10 @@ const ItemCreate = () => {
       <div>Current URL ID: {params.id}</div>
       {currentItem ? (
         <>
-          <div>
-            Current Item: {currentItem.title} the category is{" "}
-            {currentItem.category} Testing: {currentItem.colors[1]}
+          Current Item: {currentItem.title} the category is{" "}
+          {currentItem.category} Testing: {currentItem.colors[1]}
+          <div className="info">
+            <pre>{JSON.stringify(orderInfo, null, '\t')}</pre>
           </div>
 
           <Item
@@ -80,14 +81,15 @@ const ItemCreate = () => {
 
           <div className='colors-grid'>
             {currentItem.colors.map((color) => (
-              <Colors
-                color={color}
+              <Button
+                name={color}
                 key={color}
                 onClick={handleAddColor}
                 className={color in orderInfo.Sizes ? "selected" : ""}
+                divClass='color'
               />
             ))}
-            <pre>{JSON.stringify(orderInfo, null, '\t')}</pre>
+            
           </div>
 
           {/* Sizing of Selected Color Styles */}
@@ -99,21 +101,23 @@ const ItemCreate = () => {
               sizeValues={orderInfo.Sizes}
             />
           ))}
-
-          {['front', 'back', 'left shoulder', 'right shoulder'].map((item) => (
-            <Colors
-            key={item}
-            color={item}
-            onClick={addPrintArea}
-            className={item in orderInfo["Printing Areas"] ? "selected" : ""}
-            />
-          ))}
-
+          <div className="printLocation-container">
+            {['front', 'back', 'left shoulder', 'right shoulder'].map((item) => (
+              <Button
+              key={item}
+              name={item}
+              onClick={addPrintArea}
+              className={item in orderInfo["Printing Areas"] ? "selected" : ""}
+              divClass='printLocation'
+              />
+            ))}
+          </div>
           {Object.keys(orderInfo["Printing Areas"]).map((area) => (
             <PrintMethod
               key={area}
               printArea={area}
               addMethod={addPrintMethod}
+              currentMethod={orderInfo["Printing Areas"][area]['Method']}
             />
           ))}
         </>
