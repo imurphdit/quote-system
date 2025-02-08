@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 const ColorSizing = ({ color, handleSizeChange, sizeValues }) => {
   return (
     <div className='color-size-grid'>
-      <p className='color-size-title'>{color}</p>
+      <p className={'color-size-title' + ' background-color:' + color}>{color}</p>
       {["S", "M", "L", "XL"].map((size) => (
         <div key={size}>
           <p>{size}</p>

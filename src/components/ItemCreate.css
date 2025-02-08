@@ -1,5 +1,6 @@
 .colors-grid {
     display: flex;
+    margin-bottom: 25px;
 }
 
 .color {
@@ -10,7 +11,7 @@
 
 .color-size-grid {
     display: grid;
-    margin-top: 50px;
+    margin-bottom: 25px;
 }
 
 .color-size-title {
@@ -33,10 +34,20 @@
 .print-method-section {
     width: 90%;
     border: 1px solid black;
+    margin-bottom: 25px;
+}
+
+.print-method-options {
+    display: flex;
+}
+
+.print-method-options > p {
+    margin: 10px;
 }
 
 .printLocation-container {
     display: flex;
+    margin-bottom: 25px;
 }
 
 .printLocation {
@@ -52,3 +63,20 @@
     border: 1px solid black;
     color: aliceblue;
 }
+
+.screenprint-options {
+    display: flex;
+}
+
+.screenprint-options > p {
+    margin-right: 10px;
+}
+
+.embroidery-options {
+    display: flex;
+}
+
+.embroidery-options > p {
+    margin-right: 10px;
+}
+

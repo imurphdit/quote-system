@@ -35,32 +35,72 @@ const ItemCreate = () => {
   };
 
   const addPrintArea = (area) => {
-    if (area in orderInfo["Printing Areas"]){
-      const newList = {...orderInfo}
-      delete newList["Printing Areas"][area]
-      setOrderInfo(newList)
+    if (area in orderInfo["Printing Areas"]) {
+      const newList = { ...orderInfo };
+      delete newList["Printing Areas"][area];
+      setOrderInfo(newList);
     } else {
       setOrderInfo((prev) => ({
-        ...prev, "Printing Areas": {...prev["Printing Areas"], [area]: {Method: "", Size: "", }}
-      }))
+        ...prev,
+        "Printing Areas": {
+          ...prev["Printing Areas"],
+          [area]: { Method: "" },
+        },
+      }));
     }
-  }
-
+  };
 
   const addPrintMethod = (area, method) => {
     console.log("Area: " + area + " Method: " + method);
-    const currentMethod = orderInfo["Printing Areas"][area]['Method'];
-    
-    if(Object.is(currentMethod, method)){
-      setOrderInfo((prev) => ({...prev, "Printing Areas": {...prev["Printing Areas"], [area]: {...prev["Printing Areas"][area], 'Method': ''}}}))
+    const currentMethod = orderInfo["Printing Areas"][area]["Method"];
+
+    if (Object.is(currentMethod, method)) {
+      setOrderInfo((prev) => ({
+        ...prev,
+        "Printing Areas": {
+          ...prev["Printing Areas"],
+          [area]: { Method: "" },
+        },
+      }));
     } else {
-      setOrderInfo((prev) => ({...prev, "Printing Areas": {...prev["Printing Areas"], [area]: {...prev["Printing Areas"][area], 'Method': method}}}))
+      setOrderInfo((prev) => ({
+        ...prev,
+        "Printing Areas": {
+          ...prev["Printing Areas"],
+          [area]: { Method: method },
+        },
+      }));
     }
-  }
+  };
 
   const handleSizeChange = (color, size, value) => {
-    setOrderInfo((prev) => ({...prev, Sizes: {...prev.Sizes, [color]: { ...prev.Sizes[color], [size]: value }}}))
+    setOrderInfo((prev) => ({
+      ...prev,
+      Sizes: {
+        ...prev.Sizes,
+        [color]: { ...prev.Sizes[color], [size]: value },
+      },
+    }));
   };
+
+  const addMethodArgs = (method, area, value) => {
+    if(method === "screenprint"){
+      setOrderInfo((prev) => ({
+        ...prev,
+        'Printing Areas': { ...prev["Printing Areas"], [area]: { ...prev["Printing Areas"][area], 'Ink Colors': value} }
+      }))
+    } else if (method === 'embroidery'){
+      setOrderInfo((prev) => ({
+        ...prev,
+        'Printing Areas': { ...prev["Printing Areas"], [area]: { ...prev["Printing Areas"][area], 'Size': value} }
+      }))
+    } else {
+      console.log('Something fucked up while adding argument to print methods')
+      console.log(method)
+      console.log(area)
+      console.log(value)
+    }
+  }
 
   return (
     <>
@@ -69,16 +109,14 @@ const ItemCreate = () => {
         <>
           Current Item: {currentItem.title} the category is{" "}
           {currentItem.category} Testing: {currentItem.colors[1]}
-          <div className="info">
-            <pre>{JSON.stringify(orderInfo, null, '\t')}</pre>
+          <div className='info'>
+            <pre>{JSON.stringify(orderInfo, null, "\t")}</pre>
           </div>
-
           <Item
             title={currentItem.title}
             img={currentItem.img}
             className='item'
           />
-
           <div className='colors-grid'>
             {currentItem.colors.map((color) => (
               <Button
@@ -89,9 +127,7 @@ const ItemCreate = () => {
                 divClass='color'
               />
             ))}
-            
           </div>
-
           {/* Sizing of Selected Color Styles */}
           {Object.keys(orderInfo.Sizes).map((color) => (
             <ColorSizing
@@ -101,23 +137,28 @@ const ItemCreate = () => {
               sizeValues={orderInfo.Sizes}
             />
           ))}
-          <div className="printLocation-container">
-            {['front', 'back', 'left shoulder', 'right shoulder'].map((item) => (
-              <Button
-              key={item}
-              name={item}
-              onClick={addPrintArea}
-              className={item in orderInfo["Printing Areas"] ? "selected" : ""}
-              divClass='printLocation'
-              />
-            ))}
+          <div className='printLocation-container'>
+            {["front", "back", "left shoulder", "right shoulder"].map(
+              (item) => (
+                <Button
+                  key={item}
+                  name={item}
+                  onClick={addPrintArea}
+                  className={
+                    item in orderInfo["Printing Areas"] ? "selected" : ""
+                  }
+                  divClass='printLocation'
+                />
+              )
+            )}
           </div>
           {Object.keys(orderInfo["Printing Areas"]).map((area) => (
             <PrintMethod
               key={area}
               printArea={area}
               addMethod={addPrintMethod}
-              currentMethod={orderInfo["Printing Areas"][area]['Method']}
+              currentMethod={orderInfo["Printing Areas"][area]["Method"]}
+              addPrintMethodArgs={addMethodArgs}
             />
           ))}
         </>
