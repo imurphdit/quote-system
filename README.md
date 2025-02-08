@@ -11,4 +11,5 @@ compartmentalize these css files
 change proptypes to actually require stuff instead of .any  
 make steps visibility conditional based on previous steps  
 add image upload ??  
-
+add customizable pricing calculator  
+add admin page ??  
