@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 import items from "../assets/items.json";
 import Item from "./Item";
-import "./ItemCreate.css";
+//import "./ItemCreate.css";
 import { useState } from "react";
 import ColorSizing from "./ColorSizing";
 import PrintMethod from "./PrintMethod";
@@ -110,21 +110,21 @@ const ItemCreate = () => {
           Current Item: {currentItem.title} the category is{" "}
           {currentItem.category} Testing: {currentItem.colors[1]}
           <div className='info'>
-            <pre>{JSON.stringify(orderInfo, null, "\t")}</pre>
+            <pre className="fixed right-0 border-1 bg-gray-500">{JSON.stringify(orderInfo, null, "\t")}</pre>
           </div>
           <Item
             title={currentItem.title}
             img={currentItem.img}
-            className='item'
+            className=''
           />
-          <div className='colors-grid'>
+          <div className='flex flex-row gap-2'>
             {currentItem.colors.map((color) => (
               <Button
                 name={color}
                 key={color}
                 onClick={handleAddColor}
-                className={color in orderInfo.Sizes ? "selected" : ""}
-                divClass='color'
+                className={color in orderInfo.Sizes ? "bg-gray-500" : ""}
+                divClass='border-1 p-1'
               />
             ))}
           </div>
@@ -137,7 +137,7 @@ const ItemCreate = () => {
               sizeValues={orderInfo.Sizes}
             />
           ))}
-          <div className='printLocation-container'>
+          <div className='flex flex-row gap-2 mt-5'>
             {["front", "back", "left shoulder", "right shoulder"].map(
               (item) => (
                 <Button
@@ -145,9 +145,9 @@ const ItemCreate = () => {
                   name={item}
                   onClick={addPrintArea}
                   className={
-                    item in orderInfo["Printing Areas"] ? "selected" : ""
+                    item in orderInfo["Printing Areas"] ? "bg-gray-500" : ""
                   }
-                  divClass='printLocation'
+                  divClass='border-1 p-1'
                 />
               )
             )}
