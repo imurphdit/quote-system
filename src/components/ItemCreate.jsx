@@ -1,7 +1,6 @@
 import { useParams } from "react-router";
 import items from "../assets/items.json";
 import Item from "./Item";
-//import "./ItemCreate.css";
 import { useState } from "react";
 import ColorSizing from "./ColorSizing";
 import PrintMethod from "./PrintMethod";
@@ -14,7 +13,7 @@ const ItemCreate = () => {
 
   // USE STATES
   const [orderInfo, setOrderInfo] = useState({
-    Item: currentItem.title,
+    Item: currentItem ? currentItem.title : null,
     Sizes: {},
     "Printing Areas": {},
   });
@@ -84,23 +83,29 @@ const ItemCreate = () => {
   };
 
   const addMethodArgs = (method, area, value) => {
-    if(method === "screenprint"){
+    if (method === "screenprint") {
       setOrderInfo((prev) => ({
         ...prev,
-        'Printing Areas': { ...prev["Printing Areas"], [area]: { ...prev["Printing Areas"][area], 'Ink Colors': value} }
-      }))
-    } else if (method === 'embroidery'){
+        "Printing Areas": {
+          ...prev["Printing Areas"],
+          [area]: { ...prev["Printing Areas"][area], "Ink Colors": value },
+        },
+      }));
+    } else if (method === "embroidery") {
       setOrderInfo((prev) => ({
         ...prev,
-        'Printing Areas': { ...prev["Printing Areas"], [area]: { ...prev["Printing Areas"][area], 'Size': value} }
-      }))
+        "Printing Areas": {
+          ...prev["Printing Areas"],
+          [area]: { ...prev["Printing Areas"][area], Size: value },
+        },
+      }));
     } else {
-      console.log('Something fucked up while adding argument to print methods')
-      console.log(method)
-      console.log(area)
-      console.log(value)
+      console.log("Something fucked up while adding argument to print methods");
+      console.log(method);
+      console.log(area);
+      console.log(value);
     }
-  }
+  };
 
   return (
     <>
@@ -110,13 +115,12 @@ const ItemCreate = () => {
           Current Item: {currentItem.title} the category is{" "}
           {currentItem.category} Testing: {currentItem.colors[1]}
           <div className='info'>
-            <pre className="fixed right-0 border-1 bg-gray-500">{JSON.stringify(orderInfo, null, "\t")}</pre>
+            <pre className='fixed right-0 border-1 bg-gray-500'>
+              {JSON.stringify(orderInfo, null, "\t")}
+            </pre>
           </div>
-          <Item
-            title={currentItem.title}
-            img={currentItem.img}
-            className=''
-          />
+          <div className="max-w-2xs text-center">
+            <Item title={currentItem.title} img={currentItem.img} className='' /></div>
           <div className='flex flex-row gap-2'>
             {currentItem.colors.map((color) => (
               <Button
