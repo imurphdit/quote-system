@@ -108,20 +108,17 @@ const ItemCreate = () => {
   };
 
   return (
-    <>
+    <div className="flex flex-col">
       <div>Current URL ID: {params.id}</div>
       {currentItem ? (
         <>
-          Current Item: {currentItem.title} the category is{" "}
-          {currentItem.category} Testing: {currentItem.colors[1]}
-          <div className='info'>
-            <pre className='fixed right-0 border-1 bg-gray-500'>
+            <pre className='fixed left-10 top-10 border-1 bg-gray-500'>
               {JSON.stringify(orderInfo, null, "\t")}
             </pre>
+          <div className="max-w-2xs text-center self-center">
+            <Item title={currentItem.title} img={currentItem.img} className='' />
           </div>
-          <div className="max-w-2xs text-center">
-            <Item title={currentItem.title} img={currentItem.img} className='' /></div>
-          <div className='flex flex-row gap-2'>
+          <div className='flex flex-row gap-2 self-center cursor-pointer'>
             {currentItem.colors.map((color) => (
               <Button
                 name={color}
@@ -133,15 +130,17 @@ const ItemCreate = () => {
             ))}
           </div>
           {/* Sizing of Selected Color Styles */}
-          {Object.keys(orderInfo.Sizes).map((color) => (
-            <ColorSizing
-              color={color}
-              key={color}
-              handleSizeChange={handleSizeChange}
-              sizeValues={orderInfo.Sizes}
-            />
-          ))}
-          <div className='flex flex-row gap-2 mt-5'>
+          <div className="self-center">
+            {Object.keys(orderInfo.Sizes).map((color) => (
+              <ColorSizing
+                color={color}
+                key={color}
+                handleSizeChange={handleSizeChange}
+                sizeValues={orderInfo.Sizes}
+              />
+            ))}
+          </div>
+          <div className='flex flex-row gap-2 mt-5 self-center cursor-pointer'>
             {["front", "back", "left shoulder", "right shoulder"].map(
               (item) => (
                 <Button
@@ -156,20 +155,22 @@ const ItemCreate = () => {
               )
             )}
           </div>
-          {Object.keys(orderInfo["Printing Areas"]).map((area) => (
-            <PrintMethod
-              key={area}
-              printArea={area}
-              addMethod={addPrintMethod}
-              currentMethod={orderInfo["Printing Areas"][area]["Method"]}
-              addPrintMethodArgs={addMethodArgs}
-            />
-          ))}
+          <div className="self-center cursor-pointer">
+            {Object.keys(orderInfo["Printing Areas"]).map((area) => (
+              <PrintMethod
+                key={area}
+                printArea={area}
+                addMethod={addPrintMethod}
+                currentMethod={orderInfo["Printing Areas"][area]["Method"]}
+                addPrintMethodArgs={addMethodArgs}
+              />
+            ))}
+          </div>
         </>
       ) : (
         <div>No item found</div>
       )}
-    </>
+    </div>
   );
 };
 

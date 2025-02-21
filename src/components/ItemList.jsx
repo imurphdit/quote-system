@@ -23,7 +23,7 @@ function ItemList({ items }) {
             title={filter}
             onClick={() => changeFilter(filter)}
             key={filter}
-            className={'text-center font-bold hover:text-red-500'}
+            className={'text-center font-bold hover:text-red-500 cursor-pointer'}
           />
           ))}
         </div>
