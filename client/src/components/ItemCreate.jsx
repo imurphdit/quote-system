@@ -1,15 +1,15 @@
 import { useParams } from "react-router";
-import items from "../assets/items.json";
 import Item from "./Item";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ColorSizing from "./ColorSizing";
 import PrintMethod from "./PrintMethod";
 import Button from "./Button";
+import axios from "axios";
 
 const ItemCreate = () => {
   //LOCATES CURRENT ITEM VIA URL ID
   let params = useParams();
-  const currentItem = items.find((item) => item.id === params.id);
+    const [currentItem, setCurrentItem] = useState([]);
 
   // USE STATES
   const [orderInfo, setOrderInfo] = useState({
@@ -107,6 +107,22 @@ const ItemCreate = () => {
     }
   };
 
+  // FETCH ITEM FROM BACKEND
+  useEffect(() => {
+    const fetchAPI = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/api/items/' + params.id)
+        console.log(response.data)
+        setCurrentItem(response.data)
+      } catch (error) {
+        console.error(error.message);
+      }
+      
+    }
+    
+    fetchAPI();
+  }, [params.id]);
+
   return (
     <div className="flex flex-col">
       <div>Current URL ID: {params.id}</div>
@@ -119,7 +135,7 @@ const ItemCreate = () => {
             <Item title={currentItem.title} img={currentItem.img} className='' />
           </div>
           <div className='flex flex-row gap-2 self-center cursor-pointer'>
-            {currentItem.colors.map((color) => (
+            {currentItem.colors ? currentItem.colors.map((color) => (
               <Button
                 name={color}
                 key={color}
@@ -127,7 +143,7 @@ const ItemCreate = () => {
                 className={color in orderInfo.Sizes ? "bg-gray-500" : ""}
                 divClass='border-1 p-1'
               />
-            ))}
+            )) : null}
           </div>
           {/* Sizing of Selected Color Styles */}
           <div className="self-center">

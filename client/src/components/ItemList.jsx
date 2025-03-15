@@ -1,10 +1,12 @@
 import { Link } from "react-router";
 import Item from "./Item";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from 'axios';
 
-function ItemList({ items }) {
+function ItemList() {
   const [filter, setFilter] = useState("all");
+  const [items, setItems] = useState([]);
 
   const changeFilter = (category) => {
     setFilter(category.toLowerCase());
@@ -13,6 +15,23 @@ function ItemList({ items }) {
   const filteredItems =
     filter === "all" ? items : items.filter((item) => item.category === filter);
 
+
+  // Catch Clothing Items from API
+  useEffect(() => {
+    const fetchAPI = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/api/items')
+        console.log(response.data)
+        setItems(response.data)
+      } catch (error) {
+        console.error(error.message);
+      }
+      
+    }
+    
+    fetchAPI();
+  }, []);
+  
   return (
     <>
       <h3 className="text-center font-bold text-5xl p-10">What would you like to create?</h3>
