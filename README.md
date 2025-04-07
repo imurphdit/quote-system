@@ -3,7 +3,7 @@
 
 ## TODO: 
 Backend:  
-1.  Refactor Github setup  
+1.  ~~Refactor Github setup  ~~
 2.  Finish REST API  
 3.  Install database
 4.  Accept orders

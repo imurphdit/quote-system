@@ -3,3 +3,14 @@ DELETE http://localhost:8080/api/items/1
 ###
 
 GET http://localhost:8080/api/items
+
+###
+
+POST http://localhost:8080/api/items HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Independant Hoodie",
+    "img": "https://www.amazon.com/FAIABLE-Oversized-Sweatshirt-Heavyweight-Streetwear/dp/B0CL4PN7LP",
+    "category": "hoodie"
+}

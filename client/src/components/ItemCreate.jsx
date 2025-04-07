@@ -13,7 +13,7 @@ const ItemCreate = () => {
 
   // USE STATES
   const [orderInfo, setOrderInfo] = useState({
-    Item: currentItem ? currentItem.title : null,
+    Item: "Invalid",
     Sizes: {},
     "Printing Areas": {},
   });
@@ -114,6 +114,11 @@ const ItemCreate = () => {
         const response = await axios.get('http://localhost:8080/api/items/' + params.id)
         console.log(response.data)
         setCurrentItem(response.data)
+        setOrderInfo({
+            Item: response.data.title,
+            Sizes: {},
+            "Printing Areas": {},
+        })
       } catch (error) {
         console.error(error.message);
       }
